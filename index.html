@@ -474,9 +474,130 @@
         </section>
 
         <!-- HTTP Methods -->
-        <section class="main-section" id="">
-            <header></header>
-            <article></article>
+        <section class="main-section" id="HTTP_methods">
+            <header>HTTP Methods</header>
+            <article>
+                <p>Http protocol is the foundation of data communication in world wide web. Different methods of data
+                    retrieval from specified URL are defined in this protocol.</p>
+
+                <p>The following table summarizes different http methods:</p>
+
+                <table>
+                    <tr>
+                        <th>Sr.No.</th>
+                        <th>Methods & Description</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>
+                            <strong>GET</strong>
+                            <p>Sends data in unencrypted form to the server. Most common method.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><strong>HEAD</strong>
+                            <p>Same as GET, but without response body</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><strong>POST</strong>
+                            <p>Used to send HTML form data to server. Data received by POST method is not cached by
+                                server.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td><strong>PUT</strong>
+                            <p>Replaces all current representations of the target resource with the uploaded content.
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td><strong>DELETE</strong>
+                            <p>Removes all current representations of the target resource given by a URL</p>
+                        </td>
+                    </tr>
+                </table>
+
+                <p>By default, the Flask route responds to the <strong>GET</strong> requests. However, this preference
+                    can be altered by
+                    providing methods argument to <strong>route()</strong> decorator.</p>
+
+                <p>In order to demonstrate the use of <strong>POST</strong> method in URL routing, first let us create
+                    an HTML form and
+                    use the <strong>POST</strong> method to send form data to a URL.</p>
+
+                <p>Save the following script as login.html</p>
+
+                <code>
+                        &lthtml&gt
+                        &ltbody&gt
+                        &ltform action = "http://localhost:5000/login" method = "post"&gt
+                        &ltp&gtEnter Name:&lt/p&gt
+                        &ltp&gt&ltinput type = "text" name = "nm" /&gt&lt/p&gt
+                        &ltp&gt&ltinput type = "submit" value = "submit" /&gt&lt/p&gt
+                        &lt/form&gt
+                        &lt/body&gt
+                        &lt/html&gt
+                </code>
+
+                <p>Now enter the following script in Python shell.</p>
+
+                <code>
+                        from flask import Flask, redirect, url_for, request
+                        app = Flask(__name__)
+                        
+                        @app.route('/success/<name>')
+                        def success(name):
+                           return 'welcome %s' % name
+                        
+                        @app.route('/login',methods = ['POST', 'GET'])
+                        def login():
+                           if request.method == 'POST':
+                              user = request.form['nm']
+                              return redirect(url_for('success',name = user))
+                           else:
+                              user = request.args.get('nm')
+                              return redirect(url_for('success',name = user))
+                        
+                        if __name__ == '__main__':
+                           app.run(debug = True)
+                </code>
+
+                <p>After the development server starts running, open <strong>login.html</strong> in the browser, enter
+                    name in the text
+                    field and click <strong>Submit</strong>.</p>
+
+                <img src="https://www.tutorialspoint.com/flask/images/post_method_example.jpg" />
+
+                <p>Form data is POSTed to the URL in action clause of form tag.</p>
+
+                <p><strong>http://localhost/login</strong> is mapped to the <strong>login()</strong> function. Since the
+                    server has received data by <strong>POST</strong>
+                    method, value of ‘nm’ parameter obtained from the form data is obtained by:</p>
+
+                <code>user = request.form['nm']</code>
+
+                <p>It is passed to <strong>‘/success’</strong> URL as variable part. The browser displays a
+                    <strong>welcome</strong> message in the
+                    window.</p>
+
+                <img src="https://www.tutorialspoint.com/flask/images/welcome_message.jpg" />
+
+                <p>Change the method parameter to <strong>GET’</strong> in <strong>login.html</strong> and open it again
+                    in the browser. The data
+                    received on server is by the <strong>GET</strong> method. The value of ‘nm’ parameter is now
+                    obtained by:</p>
+
+                <code>User = request.args.get(‘nm’)</code>
+
+                <p>Here, <strong>args</strong> is dictionary object containing a list of pairs of form parameter and its
+                    corresponding
+                    value. The value corresponding to ‘nm’ parameter is passed on to ‘/success’ URL as before.</p>
+            </article>
         </section>
 
         <!-- Templates -->
