@@ -263,9 +263,34 @@
         </section>
 
         <!-- Routing -->
-        <section class="main-section" id="">
-            <header></header>
-            <article></article>
+        <section class="main-section" id="Routing">
+            <header>Routing</header>
+            <article>
+                <p>Modern web frameworks use the routing technique to help a user remember application URLs. It is
+                    useful to access the desired page directly without having to navigate from the home page.</p>
+
+                <p>The <strong>route()</strong> decorator in Flask is used to bind URL to a function. For example:</p>
+
+                <code>@app.route(‘/hello’)
+                        def hello_world():
+                           return ‘hello world’</code>
+
+                <p>Here, URL <strong>‘/hello’</strong> rule is bound to the <strong>hello_world()</strong> function. As
+                    a result, if a user visits
+                    <strong>http://localhost:5000/hello</strong> URL, the output of the <strong>hello_world()</strong>
+                    function will be rendered in the
+                    browser.</p>
+
+                <p>The <strong>add_url_rule()</strong> function of an application object is also available to bind a URL
+                    with a function
+                    as in the above example, <strong>route()</strong> is used.</p>
+
+                <p>A decorator’s purpose is also served by the following representation:</p>
+
+                <code>def hello_world():
+                        return ‘hello world’
+                     app.add_url_rule(‘/’, ‘hello’, hello_world)</code>
+            </article>
         </section>
 
         <!-- Variable Rules -->
