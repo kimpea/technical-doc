@@ -113,9 +113,52 @@
         </section>
 
         <!-- Environment -->
-        <section class="main-section" id="">
-            <header></header>
-            <article></article>
+        <section class="main-section" id="Environment">
+            <header>Environment</header>
+            <article>
+                <h4>Prerequisite</h4>
+                <p>Python 2.6 or higher is usually required for installation of Flask. Although Flask and its
+                    dependencies work well with Python 3 (Python 3.3 onwards), many Flask extensions do not support it
+                    properly. Hence, it is recommended that Flask should be installed on Python 2.7.</p>
+
+                <h4>Install virtualenv for development environment</h4>
+                <p><strong>virtualenv</strong> is a virtual Python environment builder. It helps a user to create
+                    multiple Python
+                    environments side-by-side. Thereby, it can avoid compatibility issues between the different versions
+                    of the libraries.</p>
+
+                <p>The following command installs <strong>virtualenv</strong>:</p>
+
+                <code>pip install virtualenv</code>
+
+                <p>This command needs administrator privileges. Add <strong>sudo</strong> before <strong>pip</strong> on
+                    Linux/Mac OS. If you are on
+                    Windows, log in as Administrator. On Ubuntu <strong>virtualenv</strong> may be installed using its
+                    package manager.
+                </p>
+
+                <code>sudo apt-get install virtualenv</code>
+
+                <p>Once installed, new virtual environment is created in a folder.</p>
+
+                <code>mkdir newproj
+                            cd newproj
+                            virtualenv venv</code>
+
+                <p>To activate corresponding environment, on <strong>Linux/OS X</strong>, use the following:</p>
+
+                <code>venv/bin/activate</code>
+
+                <p>On <strong>Windows</strong>, following can be used:</p>
+
+                <code>venv\scripts\activate</code>
+
+                <p>We are now ready to install Flask in this environment.</p>
+
+                <code>pip install Flask</code>
+
+                <p>The above command can be run directly, without virtual environment for system-wide installation.</p>
+            </article>
         </section>
 
         <!-- Application -->
