@@ -417,9 +417,60 @@
         </section>
 
         <!-- URL Building -->
-        <section class="main-section" id="">
-            <header></header>
-            <article></article>
+        <section class="main-section" id="URL_building">
+            <header>URL Building</header>
+            <article>
+                <p>The <strong>url_for()</strong> function is very useful for dynamically building a URL for a specific
+                    function. The
+                    function accepts the name of a function as first argument, and one or more keyword arguments, each
+                    corresponding to the variable part of URL.</p>
+
+                <p>The following script demonstrates use of <strong>url_for()</strong> function.</p>
+
+                <code>from flask import Flask, redirect, url_for
+                        app = Flask(__name__)
+                        
+                        @app.route('/admin')
+                        def hello_admin():
+                           return 'Hello Admin'
+                        
+                        @app.route('/guest/&ltguest&gt')
+                        def hello_guest(guest):
+                           return 'Hello %s as Guest' % guest
+                        
+                        @app.route('/user/&ltname&gt')
+                        def hello_user(name):
+                           if name =='admin':
+                              return redirect(url_for('hello_admin'))
+                           else:
+                              return redirect(url_for('hello_guest',guest = name))
+                        
+                        if __name__ == '__main__':
+                           app.run(debug = True)</code>
+
+                <p>The above script has a function <strong>user(name)</strong> which accepts a value to its argument
+                    from the URL.</p>
+
+                <p>The <strong>User()</strong> function checks if an argument received matches <strong>‘admin’</strong>
+                    or not. If it matches, the
+                    application is redirected to the <strong>hello_admin()</strong> function using
+                    <strong>url_for()</strong>, otherwise to the
+                    <strong>hello_guest()</strong> function passing the received argument as guest parameter to it.</p>
+
+                <p>Save the above code and run from Python shell.</p>
+
+                <p>Open the browser and enter URL as − <strong>http://localhost:5000/user/admin</strong></p>
+
+                <p>The application response in browser is:</p>
+
+                <code>Hello Admin</code>
+
+                <p>Enter the following URL in the browser − <strong>http://localhost:5000/user/mvl</strong></p>
+
+                <p>The application response now changes to:</p>
+
+                <code>Hello mvl as Guest</code>
+            </article>
         </section>
 
         <!-- HTTP Methods -->
