@@ -312,7 +312,7 @@
                 <code>from flask import Flask
                         app = Flask(__name__)
                         
-                        @app.route('/hello/<name>')
+                        @app.route('/hello/&ltname&gt')
                         def hello_name(name):
                            return 'Hello %s!' % name
                         
@@ -601,15 +601,212 @@
         </section>
 
         <!-- Templates -->
-        <section class="main-section" id="">
-            <header></header>
-            <article></article>
+        <section class="main-section" id="Templates">
+            <header>Templates</header>
+            <article>
+                <p>It is possible to return the output of a function bound to a certain URL in the form of HTML. For
+                    instance, in the following script, <strong>hello()</strong> function will render <strong>‘Hello
+                        World’</strong> with <strong>&lth1&gt</strong> tag attached
+                    to it.</p>
+
+                <code>from flask import Flask
+                        app = Flask(__name__)
+                        
+                        @app.route('/')
+                        def index():
+                           return '<html><body><h1>'Hello World'</h1></body></html>'
+                        
+                        if __name__ == '__main__':
+                           app.run(debug = True)</code>
+
+                <p>However, generating HTML content from Python code is cumbersome, especially when variable data and
+                    Python language elements like conditionals or loops need to be put. This would require frequent
+                    escaping from HTML.</p>
+
+                <p>This is where one can take advantage of Jinja2 template engine, on which Flask is based. Instead of
+                    returning hardcode HTML from the function, a HTML file can be rendered by the render_template()
+                    function.</p>
+
+                <code>from flask import Flask
+                        app = Flask(__name__)
+                        
+                        @app.route('/')
+                        def index():
+                           return render_template(‘hello.html’)
+                        
+                        if __name__ == '__main__':
+                           app.run(debug = True)</code>
+
+                <p>Flask will try to find the HTML file in the templates folder, in the same folder in which this script
+                    is present.</p>
+
+                <ul>
+                    <li>Application folder</li>
+                    <ul>
+                        <li>Hello.py</li>
+                        <li>templates</li>
+                        <ul>
+                            <li>hello.html</li>
+                        </ul>
+                    </ul>
+                </ul>
+
+                <p>The term <strong>‘web templating system’</strong> refers to designing an HTML script in which the
+                    variable data can be
+                    inserted dynamically. A web template system comprises of a template engine, some kind of data source
+                    and a template processor.</p>
+
+                <p>Flask uses <strong>jinga2</strong> template engine. A web template contains HTML syntax interspersed
+                    placeholders for
+                    variables and expressions (in these case Python expressions) which are replaced values when the
+                    template is rendered.</p>
+
+                <p>The following code is saved as <strong>hello.html</strong> in the templates folder.</p>
+
+                <code>
+                        &lt!doctype html&gt
+                        &lthtml&gt
+                        &ltbody&gt
+                           
+                        &lth1&gtHello {{ name }}!&lt/h1&gt
+                              
+                        &lt/body&gt
+                        &lt/html&gt
+                </code>
+
+                <p>Next, run the following script from Python shell.</p>
+
+                <code>
+                        from flask import Flask, render_template
+                        app = Flask(__name__)
+                        
+                        @app.route('/hello/&ltuser&gt')
+                        def hello_name(user):
+                           return render_template('hello.html', name = user)
+                        
+                        if __name__ == '__main__':
+                           app.run(debug = True)
+                </code>
+
+                <p>As the development server starts running, open the browser and enter URL as −
+                    <strong>http://localhost:5000/hello/mvl</strong></p>
+
+                <p>The <strong>variable</strong> part of URL is inserted at <strong>{{ name }}</strong> place holder.
+                </p>
+
+                <img src="https://www.tutorialspoint.com/flask/images/web_templating_system_example.jpg" />
+
+                <p>The <strong>Jinga2</strong> template engine uses the following delimiters for escaping from HTML.</p>
+
+                <ul>
+                    <li>{% ... %} for Statements</li>
+                    <li>{{ ... }} for Expressions to print to the template output</li>
+                    <li>{# ... #} for Comments not included in the template output</li>
+                    <li># ... ## for Line Statements</li>
+                </ul>
+
+                <p>In the following example, use of conditional statement in the template is demonstrated. The URL rule
+                    to the <strong>hello()</strong> function accepts the integer parameter. It is passed to the
+                    <strong>hello.html</strong> template.
+                    Inside it, the value of number received (marks) is compared (greater or less than 50) and
+                    accordingly HTML is conditionally rendered.</p>
+
+                <p>The Python Script is as follows:</p>
+
+                <code>
+                        from flask import Flask, render_template
+                        app = Flask(__name__)
+                        
+                        @app.route('/hello/&ltint:score&gt')
+                        def hello_name(score):
+                           return render_template('hello.html', marks = score)
+                        
+                        if __name__ == '__main__':
+                           app.run(debug = True)
+                </code>
+
+                <p>HTML template script of <strong>hello.html</strong> is as follows:</p>
+
+                <code>
+                        &lt!doctype html&gt
+                        &lthtml&gt
+                        &ltbody&gt
+                              {% if marks>50 %}
+                              &lth1&gt Your result is pass!&lt/h1&gt
+                              {% else %}
+                              &lth1&gtYour result is fail&lt/h1&gt
+                              {% endif %}
+                              &lt/body&gt
+                              &lt/html&gt
+                </code>
+
+                <p>Note that the conditional statements <strong>if-else</strong> and <strong>endif</strong> are enclosed
+                    in delimiter <strong>{%..%}</strong>.</p>
+
+                <p>Run the Python script and visit URL <strong>http://localhost/hello/60</strong> and then
+                    <strong>http://localhost/hello/30</strong> to
+                    see the output of HTML changing conditionally.</p>
+
+                <p>The Python loop constructs can also be employed inside the template. In the following script, the
+                    <strong>result()</strong> function sends a dictionary object to template
+                    <strong>results.html</strong> when URL
+                    <strong>http://localhost:5000/result</strong> is opened in the browser.</p>
+
+                <p>The Template part of <strong>result.html</strong> employs a <strong>for loop</strong> to render key
+                    and value pairs of dictionary
+                    object <strong>result{}</strong> as cells of an HTML table.</p>
+
+                <p>Run the following code from Python shell.</p>
+
+                <code>
+                        from flask import Flask, render_template
+                        app = Flask(__name__)
+                        
+                        @app.route('/result')
+                        def result():
+                           dict = {'phy':50,'che':60,'maths':70}
+                           return render_template('result.html', result = dict)
+                        
+                        if __name__ == '__main__':
+                           app.run(debug = True)
+                </code>
+
+                <p>Save the following HTML script as <strong>result.html</strong> in the templates folder.</p>
+
+                <code>
+                        &lt!doctype html>
+                        &lthtml>
+                        &ltbody>
+                        &lttable border = 1>
+                        {% for key, value in result.iteritems() %}
+                        &lttr&gt
+                        &ltth&gt {{ key }} &lt/th&gt
+                        &lttd&gt {{ value }} &lt/td&gt
+                        &lt/tr&gt
+                        {% endfor %}
+                        &lt/table&gt
+                        &lt/body&gt
+                        &lt/html&gt
+                </code>
+
+                <p>Here, again the Python statements corresponding to the <strong>For</strong> loop are enclosed in
+                    {%..%} whereas, the
+                    expressions <strong>key and value</strong> are put inside <strong>{{ }}</strong>.</p>
+
+                <p>After the development starts running, open <strong>http://localhost:5000/result</strong> in the
+                    browser to get the
+                    following output.</p>
+
+                <img src="https://www.tutorialspoint.com/flask/images/table_template_example.jpg" />
+            </article>
         </section>
 
         <!-- References -->
-        <section class="main-section" id="">
-            <header></header>
-            <article></article>
+        <section class="main-section" id="References">
+            <header>References</header>
+            <article>
+                <p>All the documentation in this page is taken from <a href="https://www.tutorialspoint.com/flask/index.htm" target="_blank">tutorialspoint</a>.</p>
+            </article>
         </section>
 
     </main>
