@@ -294,9 +294,126 @@
         </section>
 
         <!-- Variable Rules -->
-        <section class="main-section" id="">
-            <header></header>
-            <article></article>
+        <section class="main-section" id="Variable_rules">
+            <header>Variable Rules</header>
+            <article>
+                <p>It is possible to build a URL dynamically, by adding variable parts to the rule parameter. This
+                    variable part is marked as <strong>&ltvariable-name&gt
+                    </strong>. It is passed as a keyword argument to the function with
+                    which the rule is associated.</p>
+
+                <p>In the following example, the rule parameter of <strong>route()</strong> decorator contains
+                    <strong>&ltname&gt</strong> variable part
+                    attached to URL <strong>‘/hello’</strong>. Hence, if the
+                    <strong>http://localhost:5000/hello/TutorialsPoint</strong> is entered as
+                    a <strong>URL</strong> in the browser, <strong>‘TutorialPoint’</strong> will be supplied to
+                    <strong>hello()</strong> function as argument.</p>
+
+                <code>from flask import Flask
+                        app = Flask(__name__)
+                        
+                        @app.route('/hello/<name>')
+                        def hello_name(name):
+                           return 'Hello %s!' % name
+                        
+                        if __name__ == '__main__':
+                           app.run(debug = True)</code>
+
+                <p>Save the above script as <strong>hello.py</strong> and run it from Python shell. Next, open the
+                    browser and enter URL
+                    <strong>http://localhost:5000/hello/TutorialsPoint</strong>.</p>
+
+                <p>The following output will be displayed in the browser.</p>
+
+                <code>Hello TutorialsPoint!</code>
+
+                <p>In addition to the default string variable part, rules can be constructed using the following
+                    converters:</p>
+
+                <table>
+                    <tr>
+                        <th>Sr.No.</th>
+                        <th>Converters & Description</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>
+                            <strong>int</strong>
+                            <p>Accepts integer</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><strong>float</strong>
+                            <p>For floating point value</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><strong>path</strong>
+                            <p>Accepts slashes used as directory separator character</p>
+                        </td>
+                    </tr>
+                </table>
+
+                <p>In the following code, all these constructors are used.</p>
+
+                <code>from flask import Flask
+                        app = Flask(__name__)
+                        
+                        @app.route('/blog/<int:postID>')
+                        def show_blog(postID):
+                           return 'Blog Number %d' % postID
+                        
+                        @app.route('/rev/<float:revNo>')
+                        def revision(revNo):
+                           return 'Revision Number %f' % revNo
+                        
+                        if __name__ == '__main__':
+                           app.run()</code>
+
+                <p>Run the above code from Python Shell. Visit the URL <strong>http://localhost:5000/blog/11</strong> in
+                    the browser.</p>
+
+                <p>The given number is used as argument to the <strong>show_blog()</strong> function. The browser
+                    displays the following output:</p>
+
+                <code>Blog Number 11</code>
+
+                <p>Enter this URL in the browser − <strong>http://localhost:5000/rev/1.1</strong></p>
+
+                <p>The <strong>revision()</strong> function takes up the floating point number as argument. The
+                    following result appears
+                    in the browser window:</p>
+
+                <code>Revision Number 1.100000</code>
+
+                <p>The URL rules of Flask are based on <strong>Werkzeug’s</strong> routing module. This ensures that the
+                    URLs formed are
+                    unique and based on precedents laid down by Apache.</p>
+
+                <p>Consider the rules defined in the following script:</p>
+
+                <code>from flask import Flask
+                        app = Flask(__name__)
+                        
+                        @app.route('/flask')
+                        def hello_flask():
+                           return 'Hello Flask'
+                        
+                        @app.route('/python/')
+                        def hello_python():
+                           return 'Hello Python'
+                        
+                        if __name__ == '__main__':
+                           app.run()</code>
+
+                <p>Both the rules appear similar but in the second rule, trailing slash <strong>(/)</strong> is used. As
+                    a result, it
+                    becomes a canonical URL. Hence, using <strong>/python</strong> or <strong>/python/</strong> returns
+                    the same output. However, in case
+                    of the first rule, <strong>/flask/</strong> URL results in <strong>404 Not Found</strong> page.</p>
+            </article>
         </section>
 
         <!-- URL Building -->
