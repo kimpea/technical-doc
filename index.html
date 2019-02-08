@@ -162,9 +162,104 @@
         </section>
 
         <!-- Application -->
-        <section class="main-section" id="">
-            <header></header>
-            <article></article>
+        <section class="main-section" id="Application">
+            <header>Application</header>
+            <article>
+                <p>In order to test <strong>Flask</strong> installation, type the following code in the editor as
+                    <strong>Hello.py</strong></p>]
+                <code>from flask import Flask 
+                        app = Flask(__name__)
+                                          
+                        @app.route('/')
+                        def hello_world():
+                            return 'Hello World’
+                                                
+                        if __name__ == '__main__':
+                            app.run()</code>
+
+                <p>Importing flask module in the project is mandatory. An object of Flask class is our
+                    <strong>WSGI</strong> application.</p>
+                <p>Flask constructor takes the name of <strong>current module (__name__)</strong> as argument.</p>
+                <p>The <strong>route()</strong> function of the Flask class is a decorator, which tells the application
+                    which URL should call the associated function.</p>
+
+                <code>app.route(rule, options)</code>
+
+                <ul>
+                    <li>The <strong>rule</strong> parameter represents URL binding with the function.</li>
+                    <li>The <strong>options</strong> is a list of parameters to be forwarded to the underlying Rule
+                        object.</li>
+                </ul>
+
+                <p>In the above example, <strong>‘/’</strong> URL is bound with <strong>hello_world()</strong> function.
+                    Hence, when the home page of web
+                    server is opened in browser, the output of this function will be rendered.</p>
+
+                <p>Finally the <strong>run()</strong> method of Flask class runs the application on the local
+                    development server.</p>
+
+                <code>app.run(host, port, debug, options)</code>
+
+                <p>All parameters are optional</p>
+
+                <table>
+                    <tr>
+                        <th>Sr.No.</th>
+                        <th>Parameters & Description</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>
+                            <strong>host</strong>
+                            <p>Hostname to listen on. Defaults to 127.0.0.1 (localhost). Set to ‘0.0.0.0’ to have server
+                                available externally</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><strong>port</strong>
+                            <p>Defaults to 5000</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><strong>debug</strong>
+                            <p>Defaults to false. If set to true, provides a debug information</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td><strong>options</strong>
+                            <p>To be forwarded to underlying Werkzeug server.</p>
+                        </td>
+                    </tr>
+                </table>
+
+                <p>The above given <strong>Python</strong> script is executed from Python shell.</p>
+
+                <code>Python Hello.py</code>
+
+                <p>A message in Python shell informs you that</p>
+
+                <code>* Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)</code>
+
+                <p>Open the above URL <strong>(localhost:5000)</strong> in the browser. <strong>‘Hello World’</strong>
+                    message will be displayed on it.</p>
+
+                <h4>Debug mode</h4>
+                <p>A <strong>Flask</strong> application is started by calling the <strong>run()</strong> method.
+                    However, while the application is under
+                    development, it should be restarted manually for each change in the code. To avoid this
+                    inconvenience, enable <strong>debug support</strong>. The server will then reload itself if the code
+                    changes. It will
+                    also provide a useful debugger to track the errors if any, in the application.</p>
+                <p>The <strong>Debug</strong> mode is enabled by setting the <strong>debug</strong> property of the
+                    <strong>application</strong> object to <strong>True</strong> before
+                    running or passing the debug parameter to the <strong>run()</strong> method.</p>
+                <code>app.debug = True
+                        app.run()
+                        app.run(debug = True)</code>
+            </article>
         </section>
 
         <!-- Routing -->
