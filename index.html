@@ -298,12 +298,12 @@
             <header>Variable Rules</header>
             <article>
                 <p>It is possible to build a URL dynamically, by adding variable parts to the rule parameter. This
-                    variable part is marked as <strong>&ltvariable-name&gt
+                    variable part is marked as <strong>&lt;variable-name&gt;
                     </strong>. It is passed as a keyword argument to the function with
                     which the rule is associated.</p>
 
                 <p>In the following example, the rule parameter of <strong>route()</strong> decorator contains
-                    <strong>&ltname&gt</strong> variable part
+                    <strong>&lt;name&gt;</strong> variable part
                     attached to URL <strong>‘/hello’</strong>. Hence, if the
                     <strong>http://localhost:5000/hello/TutorialsPoint</strong> is entered as
                     a <strong>URL</strong> in the browser, <strong>‘TutorialPoint’</strong> will be supplied to
@@ -312,7 +312,7 @@
                 <code>from flask import Flask
                         app = Flask(__name__)
                         
-                        @app.route('/hello/&ltname&gt')
+                        @app.route('/hello/&lt;name&gt;')
                         def hello_name(name):
                            return 'Hello %s!' % name
                         
@@ -434,11 +434,11 @@
                         def hello_admin():
                            return 'Hello Admin'
                         
-                        @app.route('/guest/&ltguest&gt')
+                        @app.route('/guest/&lt;guest&gt;')
                         def hello_guest(guest):
                            return 'Hello %s as Guest' % guest
                         
-                        @app.route('/user/&ltname&gt')
+                        @app.route('/user/&lt;name&gt;')
                         def hello_user(name):
                            if name =='admin':
                               return redirect(url_for('hello_admin'))
@@ -533,15 +533,15 @@
                 <p>Save the following script as login.html</p>
 
                 <code>
-                        &lthtml&gt
-                        &ltbody&gt
-                        &ltform action = "http://localhost:5000/login" method = "post"&gt
-                        &ltp&gtEnter Name:&lt/p&gt
-                        &ltp&gt&ltinput type = "text" name = "nm" /&gt&lt/p&gt
-                        &ltp&gt&ltinput type = "submit" value = "submit" /&gt&lt/p&gt
-                        &lt/form&gt
-                        &lt/body&gt
-                        &lt/html&gt
+                        &lt;html&gt;
+                        &lt;body&gt;
+                        &lt;form action = "http://localhost:5000/login" method = "post"&gt;
+                        &lt;p&gt;Enter Name:&lt;/p&gt
+                        &lt;p&gt;&lt;input type = "text" name = "nm" /&gt;&lt;/p&gt;
+                        &lt;p&gt;&lt;input type = "submit" value = "submit" /&gt;&lt;/p&gt;
+                        &lt;/form&gt;
+                        &lt;/body&gt;
+                        &lt;/html&gt;
                 </code>
 
                 <p>Now enter the following script in Python shell.</p>
@@ -606,7 +606,7 @@
             <article>
                 <p>It is possible to return the output of a function bound to a certain URL in the form of HTML. For
                     instance, in the following script, <strong>hello()</strong> function will render <strong>‘Hello
-                        World’</strong> with <strong>&lth1&gt</strong> tag attached
+                        World’</strong> with <strong>&lt;h1&gt;</strong> tag attached
                     to it.</p>
 
                 <code>from flask import Flask
@@ -664,14 +664,14 @@
                 <p>The following code is saved as <strong>hello.html</strong> in the templates folder.</p>
 
                 <code>
-                        &lt!doctype html&gt
-                        &lthtml&gt
-                        &ltbody&gt
+                        &lt;!doctype html&gt;
+                        &lt;html&gt;
+                        &lt;body&gt;
                            
-                        &lth1&gtHello {{ name }}!&lt/h1&gt
+                        &lt;h1&gt;Hello {{ name }}!&lt/h1&gt
                               
-                        &lt/body&gt
-                        &lt/html&gt
+                        &lt;/body&gt;
+                        &lt;/html&gt;
                 </code>
 
                 <p>Next, run the following script from Python shell.</p>
@@ -680,7 +680,7 @@
                         from flask import Flask, render_template
                         app = Flask(__name__)
                         
-                        @app.route('/hello/&ltuser&gt')
+                        @app.route('/hello/&lt;user&gt;')
                         def hello_name(user):
                            return render_template('hello.html', name = user)
                         
@@ -717,7 +717,7 @@
                         from flask import Flask, render_template
                         app = Flask(__name__)
                         
-                        @app.route('/hello/&ltint:score&gt')
+                        @app.route('/hello/&lt;int:score&gt;')
                         def hello_name(score):
                            return render_template('hello.html', marks = score)
                         
@@ -728,16 +728,16 @@
                 <p>HTML template script of <strong>hello.html</strong> is as follows:</p>
 
                 <code>
-                        &lt!doctype html&gt
-                        &lthtml&gt
-                        &ltbody&gt
+                        &lt;!doctype html&gt;
+                        &lt;html&gt;
+                        &lt;body&gt;
                               {% if marks>50 %}
-                              &lth1&gt Your result is pass!&lt/h1&gt
+                              &lt;h1&gt; Your result is pass!&lt;/h1&gt;
                               {% else %}
-                              &lth1&gtYour result is fail&lt/h1&gt
+                              &lt;h1&gt;Your result is fail&lt;/h1&gt;
                               {% endif %}
-                              &lt/body&gt
-                              &lt/html&gt
+                              &lt;/body&gt;
+                              &lt;/html&gt;
                 </code>
 
                 <p>Note that the conditional statements <strong>if-else</strong> and <strong>endif</strong> are enclosed
@@ -774,19 +774,19 @@
                 <p>Save the following HTML script as <strong>result.html</strong> in the templates folder.</p>
 
                 <code>
-                        &lt!doctype html>
-                        &lthtml>
-                        &ltbody>
-                        &lttable border = 1>
+                        &lt;!doctype html>
+                        &lt;html>
+                        &lt;body>
+                        &lt;table border = 1>
                         {% for key, value in result.iteritems() %}
-                        &lttr&gt
-                        &ltth&gt {{ key }} &lt/th&gt
-                        &lttd&gt {{ value }} &lt/td&gt
-                        &lt/tr&gt
+                        &lt;tr&gt;
+                        &lt;th&gt; {{ key }} &lt;/th&gt;
+                        &lt;td&gt; {{ value }} &lt;/td&gt;
+                        &lt;/tr&gt;
                         {% endfor %}
-                        &lt/table&gt
-                        &lt/body&gt
-                        &lt/html&gt
+                        &lt;/table&gt;
+                        &lt;/body&gt;
+                        &lt;/html&gt;
                 </code>
 
                 <p>Here, again the Python statements corresponding to the <strong>For</strong> loop are enclosed in
