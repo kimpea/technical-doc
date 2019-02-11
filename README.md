@@ -28,9 +28,10 @@ You can use HTML, JavaScript, and CSS to complete this project. Plain CSS is rec
 
 ### Testing
 
-This website has been tested using freeCodeCamp's testing suite on CodePen and can be viewed [here](https://codepen.io/kimaypea/pen/MLQKYB).
-It has also been published onto GitHub pages and can be viewed [here](https://kimpea.github.io/technical-doc/). 
-
+This website is responsive on all device screen sizes as tested with Mozilla Developer Tools.
+Although it is key to use the W3C Validation Services to validate HTML and CSS code, many errors had shown up due to the layout of the code in the code tags. The CSS code did pass however with no exceptions. 
 
 ### Deployment
 
+This website has been tested using freeCodeCamp's testing suite on CodePen and can be viewed [here](https://codepen.io/kimaypea/full/MLQKYB).
+It has also been published onto GitHub pages and can be viewed [here](https://kimpea.github.io/technical-doc/). 
