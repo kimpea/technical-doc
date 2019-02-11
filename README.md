@@ -28,5 +28,9 @@ You can use HTML, JavaScript, and CSS to complete this project. Plain CSS is rec
 
 ### Testing
 
+This website has been tested using freeCodeCamp's testing suite on CodePen and can be viewed [here](https://codepen.io/kimaypea/pen/MLQKYB).
+It has also been published onto GitHub pages and can be viewed [here](https://kimpea.github.io/technical-doc/). 
+
+
 ### Deployment
 
